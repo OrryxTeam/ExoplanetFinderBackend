@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      ASPNETCORE_ENVIRONMENT: Production
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -62,4 +64,5 @@ jobs:
           app-name: 'ExoplanetFinderApi'
           slot-name: 'Production'
           package: .
+
           
