@@ -1,0 +1,46 @@
+@ExoplanetFinderBackend_HostAddress = http://localhost:5291
+@ContentType = application/json
+
+### Get all assumptions
+GET {{ExoplanetFinderBackend_HostAddress}}/assumptions
+Accept: {{ContentType}}
+
+###
+
+### Get all experiments
+GET {{ExoplanetFinderBackend_HostAddress}}/experiments
+Accept: {{ContentType}}
+
+###
+
+### Create a new experiment
+POST {{ExoplanetFinderBackend_HostAddress}}/experiments
+Content-Type: {{ContentType}}
+
+{
+  "name": "Transit Light Curve Analysis",
+  "description": "Testing flux variations for exoplanet detection",
+  "dateCreated": "2025-10-05T00:00:00Z",
+  "observations": [
+    {
+      "time": 2458683.123,
+      "flux": 0.982,
+      "flux_err": 0.003,
+      "quality": 1,
+      "centroid_col": 125.4,
+      "centroid_row": 97.2
+    }
+  ]
+}
+
+###
+
+### Get experiment by ID
+GET {{ExoplanetFinderBackend_HostAddress}}/experiments/{{id}}
+Accept: {{ContentType}}
+
+###
+
+### Delete all experiments
+DELETE {{ExoplanetFinderBackend_HostAddress}}/experiments
+Accept: {{ContentType}}
