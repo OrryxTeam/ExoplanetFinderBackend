@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-latest
     env:
       ASPNETCORE_ENVIRONMENT: Production
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      ConnectionStrings__Default: ${{ secrets.DB_CONNECTION_STRING }}
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -67,4 +67,5 @@ jobs:
           package: .
 
           
+
 
