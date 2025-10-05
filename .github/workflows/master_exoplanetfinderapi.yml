@@ -12,9 +12,6 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      ASPNETCORE_ENVIRONMENT: Production
-      ConnectionStrings__Default: ${{ secrets.DB_CONNECTION_STRING }}
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -58,6 +55,16 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_74C07F75072E423BAFBF5E64E1FDC583 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_80C23F45C3934EF6A231BC31820A03C6 }}
 
+      - name: Set runtime environment variables in Azure
+        uses: azure/cli@v1
+        with:
+          inlineScript: |
+            az webapp config appsettings set \
+              --name "ExoplanetFinderApi" \
+              --resource-group "ExoplanetFinder" \
+              --settings "ASPNETCORE_ENVIRONMENT=Production" \
+                        "ConnectionStrings__Default=${{ secrets.DB_CONNECTION_STRING }}" \
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -67,5 +74,6 @@ jobs:
           package: .
 
           
+
 
 
